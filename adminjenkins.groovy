@@ -51,8 +51,8 @@ pipeline {
         script {
           dockerImage.run("-p 0.0.0.0:80:5000/tcp --rm --name mypythonadminContainer")
         }
-      }*/
-    }
+      }
+    }*/
     
     stage('Deploy to K8s') {
       steps{
