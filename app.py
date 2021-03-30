@@ -67,7 +67,7 @@ def filesupload():
       qcfname = request.form["qcfname"]
       
       if filetype == "Quiz":
-          path = '/home/hari_98_d/certapp/admin/quiz/'
+          path = '/usr/src/app/quiz/'
           file.save(os.path.join(path, file.filename))   
           database = pymysql.connect(user=db_user, password=db_password, host=host, db=db_name)
           cursor = database.cursor()
@@ -94,7 +94,7 @@ def filesupload():
           database.close()
           return render_template("adminpage.html")
       elif filetype == "Flash Cards":
-          path = '/home/hari_98_d/certapp/admin/cards/'
+          path = '/usr/src/app/cards/'
           file.save(os.path.join(path, file.filename))   
           database = pymysql.connect(user=db_user, password=db_password, host=host, db=db_name)
           cursor = database.cursor()
@@ -118,7 +118,7 @@ def filesupload():
           return render_template("adminpage.html")
       else: 
           #filetype == "Course Content"
-          path = '/home/hari_98_d/certapp/admin/pdfs/'
+          path = '/usr/src/app/pdfs/'
           file.save(os.path.join(path, file.filename))
           database = pymysql.connect(user=db_user, password=db_password, host=host, db=db_name)
           cursor = database.cursor()
@@ -247,4 +247,4 @@ def ajaxlivesearch():
     return  render_template('allcertificatecard.html', certtable=certtable)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', debug=True)
