@@ -46,12 +46,12 @@ pipeline {
     }
     
     // Running Docker container, make sure port 80 mapped from flask server port 5000 is opened in
-    stage('Docker Run') {
+    /*stage('Docker Run') {
       steps{
         script {
           dockerImage.run("-p 0.0.0.0:80:5000/tcp --rm --name mypythonadminContainer")
         }
-      }
+      }*/
     }
     
     stage('Deploy to K8s') {
