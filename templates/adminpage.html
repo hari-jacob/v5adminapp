@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home</title>
+<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/admin.css')}}">
+<!-- <link rel="stylesheet" type="text/css" href="admin.css"> -->
+<script>
+    $(document).ready(function(){
+      load_data();
+      function load_data(query)
+      {
+       $.ajax({
+        url:"/ajaxlivesearch",
+        method:"POST",
+        data:{query:query},
+        success:function(data)
+        {
+          $('#result').html(data);
+          $("#result").append(data.htmlresponse);
+        }
+       });
+      }
+      $('#search_text').keyup(function(){
+        var search = $(this).val();
+        if(search != ''){
+        load_data(search);
+       }else{
+        load_data();
+       }
+      });
+    });
+</script>
+<style>
+    @import url('http://fonts.cdnfonts.com/css/reckoner');
+    @import url('http://fonts.cdnfonts.com/css/mismo');                
+
+input[type=text] {
+  width: 200px;
+  margin-left:400px;
+  box-sizing: border-box;
+  border: 2px solid whitesmoke;
+  border-radius: 4px;
+  font-size: 20px;
+  background-color: white;
+  background-image: url('https://i.dlpng.com/static/png/6486857_preview.png');
+  background-size: 30px 30px;
+  background-position: 8px 8px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 760px;
+}
+
+</style>
+</head>
+<body>
+<div>
+<nav class="navbar" style="width: 100%;">
+    <div class="logo"><img src="https://www.igta5.com/images/gta-v-five-logo-v-only.png" alt=""></div>
+    <ul class="leftnav" id="leftnav">
+        <li><a class="active" href=#home>Home</a></li>
+        <li><a href=loadscoreboard>Score Board</a></li>
+        <li><a href=addbamboozles>Add Bamboozles</a></li>
+        <li><a href=#suggestionbox>Suggestion Box</a></li>
+    </ul>
+    <div class="rightnav">
+        <button class="btn" style="float: right;" onclick="window.location.href=signout" id="signout">Sign-out</button>
+    </div>
+</nav>
+</div>
+<div>
+    <br/>
+    <h3 style="font-family:'Mismo', sans-serif;font-size: 50px;color:whitesmoke;text-align: center;">Hi Bamboozler</h3>
+    <br/>
+    <br/>
+</div>
+
+<div id = "div1" style="display:block;color: whitesmoke;">
+    <div class="container search-table">
+        <div class="search-box">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5 style="font-family:'Mismo', sans-serif;font-size: 15px;color:whitesmoke;margin-left: 400px;">Search Certificates</h5>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="search_text" id="search_text" class="form-control" placeholder="Search All Fields  ex: email, name, csp...">
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
+<div id="result"></div>                        
+</body>
+</html>

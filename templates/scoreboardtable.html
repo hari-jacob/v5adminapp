@@ -1,0 +1,41 @@
+<table id="customer_data" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Quiz Name</th>
+            <th>Score</th>
+            <th width="150px">Attempt</th>
+        </tr>
+    </thead>
+    {% for row in quizscoreboard %}
+    <tr>
+        {% for data in row %}
+            <td>{{data}}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th style="background-color: #ff9966;">Virtusans Who haven`t attended the Quiz Yet</th>
+        </tr>
+    </thead>
+    {% for row in nonparty %}
+        {% for data in row %}
+	   {% set count = namespace(value=1) %}
+        <tr>
+            <td>{{data}}</td>
+        </tr>
+        {% endfor %}
+    {% endfor %}
+
+</table>
+<div class="form-group" align="center">
+<form method="POST" action="/remindmail">
+    <input type="hidden" name="sendmails" id="sendmails" value= "{% for row in nonparty %}{% for data in row %}{{data}}{% endfor %},{% endfor %}" />
+    <button type="submit" style="background-color: #252525;color:whitesmoke" class="btn btn-info">Remind Via Mail</button>
+</form>
+</div>
+
+

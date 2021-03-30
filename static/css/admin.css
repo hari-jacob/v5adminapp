@@ -1,0 +1,115 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
+body::after{
+  content: "";
+  background: url('https://wallpaperaccess.com/full/2203449.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.9;
+  filter: blur(1px);
+  -webkit-filter: blur(1px);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+.logo{
+    width: 13%;
+    height: 13%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img{
+    width: 47%;
+    height: 65px;
+    border-radius: 50%;
+    border: 1px solid cornsilk;
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    position: sticky;
+    margin-top:8px;
+    
+    
+}
+
+.leftnav{
+    display: flex;
+    align-items: center;
+    width: 60%;
+    
+}
+
+.leftnav li{
+    list-style: none;
+    padding: 10px 22px;
+}
+
+.leftnav li a{
+    font-family: 'Mismo', sans-serif;                                  
+    text-decoration: none;
+    color: white;
+    font-size:15px;
+    font-weight: bold;
+}
+
+.leftnav li a:hover{
+    /* font-family: 'Reckoner Bold', sans-serif; */
+    font-family: 'Mismo', sans-serif;                                  
+    color: #0092E3;
+    font-weight: bolder;
+    transition: .8s;
+    font-size: 20px;
+    border-bottom: 3px #d66565 dashed;
+}
+
+.active{
+    border-bottom: 3px white dashed;
+}
+
+.rightnav{
+    width: 50%;
+    padding:10px;
+    text-align:right;
+}
+#signout{
+    font-family: 'Mismo', sans-serif;                                  
+    padding: 4px;
+    width: 120px;
+    height: 39px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color:#F0F0F0;
+    border-color: #d66565;
+    color: #d66565;
+}
+
+#signout:hover{
+    padding: 8px;
+    width: 128px;
+    height: 45px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: .8s;
+    cursor: pointer;
+    background-color:#252525;
+    border-color: cornsilk;
+    color: #d66565;
+}
+
+
+h2, p{
+    margin-left: 32px;
+}

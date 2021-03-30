@@ -1,0 +1,121 @@
+<html>
+ <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Score Board</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/scoreboard.css')}}">
+  <!-- <link rel="stylesheet" type="text/css" href="scoreboard.css"> -->
+  <script>
+    $(document).ready(function(){
+      load_data();
+      function load_data(query)
+      {
+       $.ajax({
+        url:"/ajaxscoreboard",
+        method:"POST",
+        data:{query:query},
+        success:function(data)
+        {
+          $('#resscoreboard').html(data);
+          $("#resscoreboard").append(data.htmlresponse);
+        }
+       });
+      }
+      $('#qmt-quiz').change(function(){
+        var search = $(this).val();
+        // var ocs =this.className
+        if(search != ''){
+            load_data(search);
+       }else{
+       }
+      });
+    });
+</script>
+<script type="text/javascript">
+   $(function(){
+    $("#qmt-cloud").on("change",function(){
+        var levelClass = $('#qmt-cloud').find('option:selected').attr('class');
+        console.log(levelClass);
+        $('#qmt-quiz option').each(function () {
+            var self = $(this);
+            if (self.hasClass(levelClass) || typeof(levelClass) == "undefined") {
+                self.show();
+            } else {
+                self.hide();
+            }
+        });
+    });
+});
+</script>
+<style>
+    @import url('http://fonts.cdnfonts.com/css/reckoner');
+    @import url('http://fonts.cdnfonts.com/css/mismo');                
+</style>
+</head>
+<body>
+    <div>
+    <nav class="navbar" style="width: 100%;">
+        <div class="logo"><img src="https://www.igta5.com/images/gta-v-five-logo-v-only.png" alt=""></div>
+        <ul class="leftnav" id="leftnav">
+            <li><a href=home>Home</a></li>
+            <li><a class="active" href=loadscoreboard>Score Board</a></li>
+            <li><a href=addbamboozles>Add Bamboozles</a></li>
+            <li><a href=#suggestionbox>Suggestion Box</a></li>
+        </ul>
+        <div class="rightnav">
+            <button class="btn" style="float: right;" onclick="window.location.href=signout" id="signout">Sign-out</button>
+        </div>
+    </nav>
+    </div>
+    <div>
+        <br/>
+        <h3 style="font-family:'Mismo', sans-serif;font-size: 50px;color:#252525;text-align: center;">Bamboozle Score Board</h3>
+        <br/>
+        <br/>
+    </div>
+    
+  <div class="container">    
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select id="qmt-cloud" name="cloud" class="form-control" required>
+                        	<option>Select Cloud</option>
+                            <option class="GCP" value="GCP">GCP</option>
+   							 <option class="AWS" value="AWS">AWS</option>
+                             <option class="Azure" value="Azure">Azure</option>
+    						
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <select  id="qmt-quiz" name="qmt-quiz" class="form-control" required>
+                            <option value="">Select Quiz</option>
+                            <option class="GCP" value="">GCP</option>
+                            {% for row in gcpquiz %}
+                            <option class="GCP" value="GCP.{{row[0]}}">&nbsp;&nbsp;&nbsp;{{row[0]}}</option>
+                            {% endfor %}
+                            <option class="AWS" value="">AWS</option>
+                            {% for row in awsquiz %}
+                            <option class="AWS" value="AWS.{{row[0]}}">&nbsp;&nbsp;&nbsp;{{row[0]}}</option>
+                            {% endfor %}
+                            <option class="Azure" value="">Azure</option>
+                            {% for row in azurequiz %}
+                            <option class="Azure" value="Azure.{{row[0]}}">&nbsp;&nbsp;&nbsp;{{row[0]}}</option>                        
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <br />
+            <div class ="table-responsive" id="resscoreboard"></div>
+            <br />
+            <br />
+  </div>
+ </body>
+</html>
+
