@@ -19,10 +19,12 @@ RUN pip3 install xlrd -q
 COPY app.py /usr/src/app/
 COPY templates /usr/src/app/templates/
 COPY static usr/src/app/static/
+RUN mkdir /usr/src/app/pdfs
+RUN mkdir /usr/src/app/cards
+RUN mkdir /usr/src/app/quiz
+
 # tell the port number the container should expose
 EXPOSE 5000
 
 # run the application
-RUN pwd
-# RUN python3 /usr/src/app/app.py
 CMD ["python3", "/usr/src/app/app.py"]
