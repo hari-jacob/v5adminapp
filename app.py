@@ -35,7 +35,7 @@ def login():
     global email
     email =  request.form.get("email")
     password =  request.form.get("password")
-    if email =="admin@virtusa.com":
+    if email.find("admin") != -1:
         pwd=login_table(email)
         if pwd==password:
             return render_template('adminpage.html')
